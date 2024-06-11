@@ -18,5 +18,5 @@ app.add_middleware(
 
 @app.api_route("/", methods=["GET", "HEAD"])
 def stream_webcam():
-    stream = camera.WebCameraStream()
+    stream = camera.WebCameraStream(cam_id=1)
     return StreamingResponse(stream.stream_img_bytes(), headers=stream.get_metadata(), media_type=MEDIA_TYPE)
