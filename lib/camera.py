@@ -5,12 +5,6 @@ import numpy as np
 from .singleton import Singleton
 from .text_recognition import RealTimeTextRecognition
 
-if __name__ == "__main__":
-    # Provide the path to the Tesseract executable
-    tesseract_cmd_path = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
-    recognizer = RealTimeTextRecognition(tesseract_cmd_path)
-    recognizer.capture_and_process_image()
-
 class BaseWebCamera:
     def __init__(self, cam_id: int = 0) -> None:
         self.cam_id = cam_id
@@ -46,7 +40,11 @@ class WebCameraStream(BaseWebCamera, metaclass=Singleton):
             _, buffer = cv2.imencode(".jpg", self.get_frame())
             img_frame = buffer.tobytes()
             yield b"--frame\r\nContent-Type: image/jpeg\r\n\r\n" + img_frame + b"\r\n"
-
+    
+    # Provide the path to the Tesseract executable
+    tesseract_cmd_path = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+    recognizer = RealTimeTextRecognition(tesseract_cmd_path)
+    recognizer.capture_and_process_image()
 
 class WebCameraRecoder(BaseWebCamera, metaclass=Singleton):
     def __init__(self, video_name: Optional[str] = None, cam_id: int = 0):
