@@ -3,7 +3,13 @@ import cv2
 import numpy as np
 
 from .singleton import Singleton
+from .text_recognition import RealTimeTextRecognition
 
+if __name__ == "__main__":
+    # Provide the path to the Tesseract executable
+    tesseract_cmd_path = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+    recognizer = RealTimeTextRecognition(tesseract_cmd_path)
+    recognizer.capture_and_process_image()
 
 class BaseWebCamera:
     def __init__(self, cam_id: int = 0) -> None:
