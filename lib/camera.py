@@ -5,7 +5,8 @@ import numpy as np
 from .singleton import Singleton
 #from .text_recognition import RealTimeTextRecognition
 #from .circle_division import RealTimeTextRecognition
-from .barometer_recognition import RealTimeTextRecognition
+#from .barometer_recognition import RealTimeTextRecognition
+from .test_opencv import CameraCapture
 
 class BaseWebCamera:
     def __init__(self, cam_id: int = 0) -> None:
@@ -50,9 +51,11 @@ class WebCameraStream(BaseWebCamera, metaclass=Singleton):
     #recognizer.capture_and_process_image()
     #recognizer.start()
 
-    recognizer = RealTimeTextRecognition()
-    recognizer.start()
+    # recognizer = RealTimeTextRecognition()
+    # recognizer.start()
     
+    camera = CameraCapture()
+    camera.start_capture()
 
     # ------------------------------------------------------------------------------------------------
 
